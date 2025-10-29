@@ -5,12 +5,18 @@
 export const inputLabelTheme = {
   slots: {
     label: [
-      'input-label',
+      'input-label inline align-baseline',
       'text-neutral-700 dark:text-neutral-300'
     ],
-    requiredDot: 'text-red-500 required-dot'
+    requiredDot: 'text-red-500 dark:text-red-400 rounded-full bg-red-100 dark:bg-red-500/20 required-dot inline-flex items-center align-middle ml-1 *:size-4 *:-m-0.5'
   },
   variants: {
+    presentation: {
+      classic: {},
+      focused: {
+        label: 'leading-none'
+      }
+    },
     theme: {
       default: {
         label: 'font-semibold'
@@ -30,13 +36,15 @@ export const inputLabelTheme = {
         label: 'text-xs'
       },
       sm: {
-        label: 'text-xs'
+        label: 'text-xs',
       },
       md: {
-        label: 'text-sm'
+        label: 'text-sm',
+        requiredDot: 'mt-[-2px]!'
       },
       lg: {
-        label: 'text-base'
+        label: 'text-base',
+        requiredDot: '*:size-5 mt-[-3px]!'
       }
     },
     uppercaseLabels: {
@@ -48,9 +56,17 @@ export const inputLabelTheme = {
       }
     }
   },
+  compoundVariants: [
+    // Label font size adjustments for focused presentation (increase by 1 step)
+    { presentation: 'focused', size: 'xs', class: { label: 'text-sm leading-none' } },
+    { presentation: 'focused', size: 'sm', class: { label: 'text-sm leading-none' } },
+    { presentation: 'focused', size: 'md', class: { label: 'text-base leading-none' } },
+    { presentation: 'focused', size: 'lg', class: { label: 'text-xl leading-none' } }
+  ],
   defaultVariants: {
     theme: 'default',
     size: 'md',
-    uppercaseLabels: false
+    uppercaseLabels: false,
+    presentation: 'classic'
   }
 }

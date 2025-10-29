@@ -4,6 +4,7 @@
       <OpenTable
         v-if="form"
         ref="table"
+        class="border-b"
         :data="submissions"
         :loading="isLoading || isFetching"
         :form="form"
@@ -11,6 +12,7 @@
         @search="handleSearch"
         @filter="handleFilter"
         @page-change="handlePageChange"
+        @refresh="handleRefresh"
       />
 
       <!-- Submissions Table Skeleton -->
@@ -58,7 +60,8 @@ const {
   isFetching,
   setSearch,
   setStatus,
-  setPage
+  setPage,
+  refetch
 } = paginatedList(computed(() => props.form?.id))
 
 // Replace existing event handlers:
@@ -75,5 +78,11 @@ const handleFilter = (filters) => {
 const handlePageChange = (page) => {
   setPage(page)
 }
+
+const handleRefresh = () => {
+  // Refetch the data with current parameters (page, search, status)
+  refetch()
+}
+
 
 </script>
